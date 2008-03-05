@@ -1,0 +1,18 @@
+<%= error_messages_for 'access_node' %>
+
+<p><label for="access_node_name">Name (For Vis)</label><br/>
+<%= text_field 'access_node', 'name' %></p>
+<p><label for="access_node_mac">MAC Address</label><br/>
+<%= text_field 'access_node', 'mac' %></p>
+<p><label for="access_node_redirect_url">Redirect URL</label><br/>
+<%= text_field 'access_node', 'redirect_url' %></p>
+<p><label for="access_node_redirect_url">Address:</label> (Street, City, Prov)<br/>
+<%= text_field 'access_node', 'address' %></p>
+<p><label for="access_node_bandwidth_quota">Max Montly Bandwidth Limit (0 for no limit):</label><br/>
+<%= text_field 'access_node', 'quota' %></p>
+<p><label for="access_node_auth_mode">Auth Mode</label><br/>
+<select id="access_node_auth_mode" name="access_node[auth_mode]">
+<option>NORMAL</option><option>SPLASH</option>
+</select>
+</p>
+

@@ -1,0 +1,42 @@
+<% content_for 'header' do %>
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<%= global_conf.gmaps_key %>"
+      type="text/javascript"></script>
+<% end %>
+
+<%= render :partial => 'googlemap', :locals => { :access_nodes => @nodes , :routes => @routes, :global => global_conf} %>
+
+<div id="network_status">
+<% if @user.user_role != User::ROLE_SPLASH %>	
+<h3><%= @user.login %></h3>
+<table>
+<tr><td>Number of nodes:</td><td><%= @nodes.length %></td></tr>
+<tr><td>Number of online users:</td><td><%= @online_users %></td></tr>
+<tr><td>Number of total connections:</td><td><%= @total_connections %></td></tr>
+<% if @user == session[:user] %>
+<tr><td>Total Upstream:</td><td><%= @total_upstream %></td></tr>
+<tr><td>Total Downstream:</td><td><%= @total_downstream %></td></tr>
+<% end %>
+</table>
+<% end %>
+<div id="activities">
+	<h3>Actions:</h3>
+	<ul>
+	<% if @user.user_role != User::ROLE_SPLASH %>
+		<li><%= link_to 'Add Nodes', :controller => 'access_nodes', :action=> 'new' %></li>
+		<li><%= link_to 'View Node List', :controller => 'access_nodes', :action=> 'list' %></li>
+		<li><%= link_to 'Edit Account', :controller => 'user', :action=> 'update' %></li>
+		<li><%= link_to 'Add System Notice', :controller => 'notices', :action=> 'list' %></li>
+	<% end %>
+		<li><%= link_to 'Logout', :controller => 'user', :action => 'logout' %></li>
+	</ul>
+	<% if @user.user_role == User::ROLE_ADMIN %>
+	<h3>Admin Actions</h3>
+	<ul>
+		<li><%= link_to("Admin Users", :controller => 'admin', :action => 'users') %></li>
+		<li><%= link_to('Edit Global Settings', :controller => 'admin', :action => 'globals') %></li>
+		<li><%= link_to('Add or Delete System Notices', :controller => 'admin', :action => 'notices') %></li>
+		<li><%= link_to('View Node Statistics', :controller => 'admin', :action => 'nodes') %></li>
+	</ul>
+	<% end %>
+</div>
+</div>

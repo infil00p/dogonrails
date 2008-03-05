@@ -1,0 +1,18 @@
+var info_string = "<h2><%= node.name %></h2>";
+info_string += "MAC: <%= node.mac %><br />";
+info_string += "Uptime: <%= node.sys_uptime and distance_of_time_in_words node.sys_uptime %><br />";
+info_string += "Load: <%= node.sys_load %><br />";
+info_string += "Last Seen: <%= node.last_seen and (time_ago_in_words(node.last_seen).to_s + " ago") %><br />";
+info_string += "People Online: <%= node.online_users.count %><br />";
+info_string += "Public Users: <br /><ul>";
+    <% for connection in node.online_connections %>
+	  <% if connection.user.private.nil? || connection.user.private == false %>
+      	info_string += "<li><%= connection.user.login %></li>";
+	  <% end %>
+    <% end -%>
+info_string += "</ul>";
+<% unless session[:user].nil? %>
+info_string += "<br />";
+info_string += '<%= link_to "View Stats", :controller => "access_nodes", :action => "show", :id => node.id %><br />'
+info_string += '<%= link_to "Remove Node", :controller => "access_nodes", :action => "remove", :id => node.id %><br />'
+<% end %>

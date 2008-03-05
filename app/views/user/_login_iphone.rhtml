@@ -1,0 +1,15 @@
+<div id="login_iphone">
+  <p>Please type in your username and password below:</p>
+  <% form_tag :controller => 'user', :action => 'authenticate' do %>
+<label for="username">Username</label><br />
+<%= text_field_tag 'username', nil, :class => 'iphone' %><br />
+<label for="password">Password</label><br />
+<%= password_field_tag 'password', nil, :class => 'iphone' %><br />
+    <%= hidden_field_tag 'gw_id', params[:gw_id] %>
+    <%= hidden_field_tag 'gw_address', params[:gw_address] %>
+    <%= hidden_field_tag 'gw_port', params[:gw_port] %>
+    <%= submit_tag 'Login' , :class => 'iphone' %>
+  <% end %>
+</div>
+
+<%= link_to "signup for an account here", :controller => "user", :action => "signup" %>

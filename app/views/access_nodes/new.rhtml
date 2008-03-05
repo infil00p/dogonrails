@@ -1,0 +1,15 @@
+<h1>New access node</h1>
+
+<div id="new_node">
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Create" %>
+<% end %>
+
+<%= link_to 'Back', :action => 'list' %>
+</div>
+<div id="directions">
+	<p>Please find the MAC address of the device, since this is what the device will 
+	send the server when it is connected to the Internet.  On most devices, the MAC address
+	can be found on the back of the device.</p>
+</div>

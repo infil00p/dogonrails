@@ -1,0 +1,54 @@
+<h1><%= @access_node.name %></h1>
+
+<div id="graphs">
+	<div id="menu">
+		<a href="#" onclick="showBandwidth()">Bandwidth</a>
+		<a href="#" onclick="showUsage()">Usage</a>		
+	</div>
+	<div id="bandwidth">
+		<img src="/images/<%= @access_node.mac %>_bandwidth.png"/>
+	</div>
+	<div id="usage" style="display: none;">
+		<img src="/images/<%= @access_node.mac %>_usage.png"/>
+	</div>
+</div>
+<div id="summary">
+Total connections ever: <%= @access_node.connections.count %> <br />
+Online users: <%= @access_node.online_users.count %> <br />
+
+Last 30 Days of Local Activity (Up): <%= convert_to_human(@access_node.total_up) %> <br />
+Last 30 Days of Local Activity (Down): <%= convert_to_human(@access_node.total_down) %> <br />
+Last 30 Days of Total Activity (Mesh + Wifi Up): <%= convert_to_human(@access_node.aggregate_bandwidth_up) %> <br />
+Last 30 Days of Total Activity (Mesh + Wifi Down): <%= convert_to_human(@access_node.aggregate_bandwidth_down) %> <br />
+Last 30 Days of Total Activity (ALL): <%= convert_to_human(@access_node.total_aggregate_bandwidth) %> <br />
+</div>
+
+
+<table>
+	<tr>
+		<td>
+			Created On
+		</td>
+		<td>
+			Updated On
+		</td>
+		<td>access_
+			IP Address
+		</td>
+		<td>
+			MAC Address
+		</td>
+		<td>
+			Upstream
+		</td>
+		<td>
+			Downstream
+		</td>
+		<td>
+			Ban this MAC
+		</td>
+	</tr>
+<%= render :partial => 'connection', :collection => @connections %>
+</table>
+
+<%= will_paginate @connections %>

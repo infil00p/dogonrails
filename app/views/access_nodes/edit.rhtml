@@ -1,0 +1,9 @@
+<h1>Editing <%= @access_node.name %></h1>
+
+<% form_tag :action => 'update', :id => @access_node do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Save' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @access_node %> |
+<%= link_to 'Back', :action => 'list' %>

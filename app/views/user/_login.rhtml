@@ -1,0 +1,22 @@
+<div id="login">
+  <p>Please type in your username and password below:</p>
+  <% form_tag :controller => 'user', :action => 'authenticate' do %>
+    <table>
+    <tr>
+      <td><label for="username">Username</label></td>
+      <td><%= text_field_tag 'username' %></td>
+    </tr>
+    <tr>
+      <td><label for="password">Password</label></td>
+      <td><%= password_field_tag 'password' %></td>
+    </tr>
+    </table>
+
+    <%= hidden_field_tag 'gw_id', params[:gw_id] %>
+    <%= hidden_field_tag 'gw_address', params[:gw_address] %>
+    <%= hidden_field_tag 'gw_port', params[:gw_port] %>
+    <%= submit_tag 'Login' %>
+  <% end %>
+</div>
+
+<%= link_to "signup for an account here", :controller => "user", :action => "signup" %>

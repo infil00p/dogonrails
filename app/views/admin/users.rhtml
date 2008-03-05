@@ -1,0 +1,11 @@
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Login</th>
+		<th>E-Mail</th>
+		<th>Nodes</th>
+		<th>Edit</th>
+	</tr>
+	<%= render :partial => 'user', :collection => @users %>
+</table>
+<%= will_paginate @users %>

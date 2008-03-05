@@ -1,0 +1,7 @@
+<tr>
+	<td><%= user.id %></td>
+	<td><%= user.login %></td>
+	<td><%= user.email %></td>
+	<td><%= user.access_nodes.length %></td>
+	<td><%= link_to 'Edit', :controller => 'admin', :action => 'edit_user', :uid => user.id %></td>
+</tr>

@@ -1,0 +1,78 @@
+AccessControl
+=============
+
+** Authentication **
+
+class ApplicationController < ActionController::Base
+  authenticate :signin => {:controller => "authentication", :action => "signin"},
+               :model => :user
+end
+
+Given parameters are default and can be left out. If the use is not logged in,
+he will be redirected to the signin action. The given model has to use acts_as_authenticated.
+
+class AuthenticationController < ApplicationController
+  no_authentication_for :signin, :signout
+  
+  def signin
+    if request.post?
+      user_class = ApplicationController.authentication_options[:model].to_class
+      user = user_class.authenticate(params[:user][:user_name], user_class.hash_password(params[:user][:password]))
+      if user
+        session[ApplicationController.authentication_options[:model]] = user
+        if session[:intended_uri]
+          redirect_to(session[:intended_uri] || {:action => "index"})
+          session[:intended_uri] = nil
+        else
+          redirect_to :controller => "guestbook"
+        end
+      else
+        flash[:notice] = "We could not log you in."
+      end
+    end
+  end
+
+  def signout
+    session[ApplicationController.authentication_options[:model]] = nil
+    redirect_to authentication_options[:signin]
+  end
+end
+
+
+** acts_as_authenticated **
+
+require 'digest/sha1'
+class Use < ActiveRecord::Base
+  acts_as_authenticated :signin_id => :user_name, :password => :password
+end
+
+Given parameters are default and can be left out.
+
+
+** Authorization **
+
+class AdminController < ApplicationController
+  authorize "admin:rw"
+  authorize "admin:x", :only => :special_action
+  
+  def index
+    ...
+  end
+
+  def create
+    ...
+  end
+  
+  def destroy
+    ...
+  end
+
+  def special_action
+    ...
+  end
+end
+
+
+** Migration **
+
+Migration script is available at /vendor/plugins/access_control/generators/authentication/templates/migration.rb

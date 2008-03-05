@@ -1,0 +1,10 @@
+Welcome to <%= @node.name %>!
+
+<%= render :partial => "login" %>
+
+<div id="notices">
+<h2>Notices</h2>
+<div id="inner_notices">
+	<%= render :partial => 'notices/notice', :collection => @notices %>
+</div>
+</div>

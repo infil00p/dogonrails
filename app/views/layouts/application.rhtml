@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title><%= @page_title or "DogOnRails Authentication Server" %></title>
+  <%= yield :header %>
+  <%= javascript_include_tag :defaults %>
+  <% # Include TinyMCE before other JS to avoid problems -%>
+  <%= javascript_include_tiny_mce_if_used %>
+  <%= tiny_mce if using_tiny_mce? %>
+  <link rel="shortcut icon" type="image/png" href="/images/icon.png" />
+  <%= stylesheet_link_tag 'style' %>
+</head>
+<body>
+	<div id="container">
+	<div id='branding'>
+		<%= global_conf.network_name %>
+	</div>
+	
+  <div id="contentbox">
+  <p class="flash"><%= flash[:notice] %></p>
+	<div id="content">
+  		<%= yield  %>
+  	</div>
+	<div id="footer">
+		Powered by <br /><a href="http://www.dogonrails.net"><img src="/images/DogOnRails-small.png" border="0" /></a>
+  	</div>
+  </div>
+	<%= global_conf.ganal %>
+</body>
+</html>

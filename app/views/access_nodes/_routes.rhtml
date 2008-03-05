@@ -1,0 +1,14 @@
+<% routes.each do |route| 
+	last_node = nil
+	route.each do | node |
+		unless last_node.nil?
+%>
+		var polyline = new GPolyline([ 
+			new GLatLng(<%= last_node.lat %>, <%= last_node.lng %>),
+			new GLatLng(<%= node.lat%>, <%= node.lng %>), "#00ff00", 5]);
+		map.addOverlay(polyline);
+<% 		end
+		last_node = node
+	end
+   end  
+%>

@@ -1,0 +1,14 @@
+<%= error_messages_for :user %>
+<% form_for :user do |f| -%>
+
+<p><label for="password">Password</label><br/>
+<%= f.password_field :password %></p>
+
+<p><label for="password_confirmation">Confirm Password</label><br/>
+<%= f.password_field :password_confirmation %></p>
+
+<p><label for="Public: ">Public Profile: </label> <%= f.check_box :public %>
+</p>
+
+<p><%= submit_tag 'Update' %></p>
+<% end -%>

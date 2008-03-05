@@ -1,0 +1,10 @@
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Server</th>
+		<th>Edit</th>
+	</tr>
+	<%= render :partial => 'auth', :collection => @auth %>
+</table>
+<%= will_paginate @auth %>

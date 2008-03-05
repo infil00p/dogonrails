@@ -1,0 +1,35 @@
+<% content_for 'header' do %>
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<%= global_conf.gmaps_key %>"
+      type="text/javascript"></script>
+<% end %>
+
+<%= render :partial => 'user/googlemap', :locals => { :access_nodes => @access_nodes, :routes => @routes, :global => global_conf } %>
+
+<div id="network_status">
+	<h2>Network Usage</h2>
+Upstream: <%= all_data_uploaded %><br />
+Downstream: <%= all_data_downloaded %><br />
+<br />
+<% if session[:user].nil? %>
+<div id="login">
+  <p>Please type in your username and password below:</p>
+  <% form_tag :controller => 'user', :action => 'login_profile' do %>
+  <table><tr><td>
+  <label for="username">Username</label></td>
+  <td><%= text_field_tag 'username' %></td></tr>
+  <tr><td><label for="password">Password</label></td>
+  <td><%= password_field_tag 'password' %></td></tr>
+  </table>
+  <%= submit_tag 'Login' %>
+  <% end %>
+</div>
+
+<p>Click <%= link_to 'here', :controller => 'user', :action => 'signup' %> to signup</p>
+
+<% else %>
+<script>
+	document.location.href = '/user/profile'
+</script>
+
+<% end %>
+</div>

@@ -1,0 +1,8 @@
+<% for column in Notice.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @notice.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @notice %> |
+<%= link_to 'Back', :action => 'list' %>

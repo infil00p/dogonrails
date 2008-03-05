@@ -1,0 +1,7 @@
+<% form_for :globalconf, @global, :url => { :action => 'global' }, :html => { :multipart => true } do |f| %>
+<%= f.text_field 'network_name' %><br />
+<%= file_column_field('network_logo',"image") %>
+<%= f.text_field_tag 'center_lat' %>
+<%= f.text_field_tag 'center_lng' %>
+<%= submit_tag 'Update Global Settings' %>
+<% end %>

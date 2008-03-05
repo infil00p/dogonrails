@@ -1,0 +1,28 @@
+Welcome!
+
+<% if @node -%>
+  <p>You seem to be at <%= @node.name %>.</p>
+
+  <p>Try to get to another page (for example... google), to get the hotspot's login screen.</p>
+
+  <p>Otherwise:</p>
+<% end -%>
+
+<p>You can login as an "external user":</p>
+
+<div id="login">
+  <p>Please type in your username and password below:</p>
+  <% form_tag :controller => 'user', :action => 'login_profile' do %>
+  <table><tr><td>
+  <label for="username">Username</label></td>
+  <td><%= text_field_tag 'username' %></td></tr>
+  <tr><td><label for="password">Password</label></td>
+  <td><%= password_field_tag 'password' %></td></tr>
+  </table>
+  <%= submit_tag 'Login' %>
+  <% end %>
+</div>
+
+<p>
+<%= link_to "signup for an account here", :controller => "user", :action => "signup" %>
+</p>

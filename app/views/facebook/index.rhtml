@@ -1,0 +1,25 @@
+<h2>FreeTheNet.ca on Facebook</h2>
+<% if @user.nil?%>
+<p>
+	Please provide your username and password for DogOnRails to Facebook so that we can
+	correspond your Facebook Account with your DogOnRails account.
+</p>
+
+  <% form_tag :controller => 'facebook', :action => 'register_uid' do %>
+  <table><tr><td>
+  <label for="username">Username</label></td>
+  <td><%= text_field_tag 'username' %></td></tr>
+  <tr><td><label for="password">Password</label></td>
+  <td><%= password_field_tag 'password' %></td></tr>
+  </table>
+  <%= submit_tag 'Register Nodes' %>
+  <% end %>
+<% else %>
+<p>
+	You have updated your FreeTheNet node status on FaceBook.  You should see it in your profile.
+	If not, then it's broken.  BTW, you have the following status.
+</p>
+
+<%= @user.fb_node_data %>
+
+<% end %>

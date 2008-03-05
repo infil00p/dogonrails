@@ -1,0 +1,11 @@
+@access_nodes.each do |access_node|
+xml.placemark {
+  xml.name(access_node.name)
+  xml.description('![CDATA[<b>' + access_node.name + '</b><br/>MAC:' + access_node.mac + '<br/> People Online: ' + access_node.online_users.count.to_s + ']]')
+  xml.point{
+    xml.coordinates(access_node.lat.to_s + ',' + access_node.lng.to_s + ',0')
+  }
+}
+end
+
+xml.target!

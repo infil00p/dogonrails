@@ -1,0 +1,9 @@
+<div id="login">
+  <p>Please accept theses terms and conditions.</p>
+  <% form_tag :controller => 'user', :action => 'authenticate' do %>
+    <%= hidden_field_tag 'gw_id', params[:gw_id] %>
+    <%= hidden_field_tag 'gw_address', params[:gw_address] %>
+    <%= hidden_field_tag 'gw_port', params[:gw_port] %>
+    <%= submit_tag 'Accept' %>
+  <% end %>
+</div>

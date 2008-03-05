@@ -1,0 +1,12 @@
+<div id="notice">
+<div id="notice_header">
+<b><%= notice.title %></b><br />
+Posted by <%= notice.user.login %> on <%= notice.date_posted.to_s %> - 
+<% if notice.access_node_id.nil? %>
+<b>Global</b>
+<% end %>
+</div>
+<div id="notice_body">
+	<%= notice.notice_text %>
+</div>
+</div>

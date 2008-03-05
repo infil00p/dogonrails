@@ -1,0 +1,23 @@
+<tr>
+	<td>
+		<%= connection.created_on %>
+	</td>
+	<td>
+		<%= connection.updated_on %>
+	</td>
+	<td>
+		<%= connection.ip %>
+	</td>
+	<td>
+		<%= connection.mac %>
+	</td>
+	<td>
+		<%= convert_to_human(connection.incoming_bytes) %>
+	</td>
+	<td>
+		<%= convert_to_human(connection.outgoing_bytes) %>
+	</td>
+	<td>
+		<%= link_to 'Ban MAC', :action => 'blacklist', :mac => connection.mac %>
+	</td>
+</tr>

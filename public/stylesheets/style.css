@@ -1,0 +1,113 @@
+body {
+  font-family: sans-serif;
+  background-color: #4d4949;
+  background-image: url('/images/background.png');
+  background-position: left top;
+  background-repeat: repeat-x;
+}
+
+p.flash {
+  color: green;
+}
+
+table {
+  border: 1px solid #aaa;
+  border-collapse: collapse;
+}
+
+table td {
+  border: 1px solid #aaa;
+}
+
+#branding {
+  font-size: 20pt;
+}
+
+#login {
+	width: 300px;
+}
+
+#mobile_div {
+	font-size: 20pt;
+	min-height: 417px;
+	max-width: 320px;
+	text-align: center;
+	position: relative;
+}
+
+table.iphone {
+	border: none;
+}
+
+td.header {
+	text-align: left;
+}
+
+input.iphone {
+	width: 100%;
+	font-size: 2em;
+}
+
+
+#notices {
+	background-color:#9999EE;
+	border-style:solid;
+	left:300px;
+	position:absolute;
+	top:0px;
+	width:680px;
+}
+
+#inner_notices {
+	background-color: #CCCCFF;
+	overflow: auto;
+	height:250px;
+}
+
+#notice_header {
+	background-color: #DDDDCC;
+	border-top: #000000 1px solid;
+	border-bottom: #000000 1px solid;
+}
+
+#container {
+	background-color: #ffffff;
+	margin: 0px auto;
+	width: 1000px;
+}
+
+#contentbox, #branding {
+	position: relative;
+}
+
+#contentbox {
+	padding: 10px;
+	min-height: 600px;
+}
+
+#map_canvas {
+	width: 640px;
+	height: 480px;
+}
+
+#network_status {
+	position: absolute;
+	right: 10px;
+	top: 0px;
+}
+
+#summary {
+	font-size:11px;
+	position:absolute;
+	right:25px;
+	top:120px;
+	width:300px;
+}
+
+#footer {
+	width: 1000px;
+	position: absolute;
+	bottom: 10px;
+	text-align: center;
+	font-size: 8pt;
+}

@@ -1,0 +1,22 @@
+<%= error_messages_for 'notice' %>
+
+<!--[form:notice]-->
+<p><label for="notice_title">Title</label><br/>
+<%= text_field 'notice', 'title'  %></p>
+
+<p><label for="notice_scope">Affected Node</label><br/>
+<select name="access_node" id="access_node">
+	<%= list_all_nodes %>
+</select>
+</p>
+
+<p><label for="notice_notice_text">Notice text</label><br/>
+<%= text_area 'notice', 'notice_text'  %></p>
+
+<p><label for="notice_date_posted">Date posted</label><br/>
+<%= datetime_select 'notice', 'date_posted'  %></p>
+
+<p><label for="notice_expiry_date">Expiry date</label><br/>
+<%= datetime_select 'notice', 'expiry_date'  %></p>
+<!--[eoform:notice]-->
+

@@ -1,0 +1,7 @@
+xml.instruct! :xml, :version => "1.0"
+xml.network {
+  xml.name('FreeTheNet.ca - Dog On Rails Data')
+  xml.total_usage_kbytes(total_usage_kbytes)
+  xml.total_user_count(total_user_count)
+  xml << yield
+}

@@ -1,0 +1,41 @@
+<h1>Nodes</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>MAC</th>
+    <th>Sys uptime</th>
+    <th>Sys load</th>
+    <th>Sys memfree</th>
+    <th>Remote IP</th>
+    <th>Last seen</th>
+    <th>Wifidog Uptime</th>
+    <th>Online users</th>
+	<th>Show</th>
+  </tr>
+<% for node in @access_nodes -%>
+  <tr>
+    <td><%= node.name %></td>
+    <td><%= node.mac %></td>
+    <td><%= node.sys_uptime and distance_of_time_in_words node.sys_uptime %></td>
+    <td><%= node.sys_load %></td>
+    <td><%= node.sys_memfree %></td>
+    <td><%= node.remote_addr %></td>
+    <td><%= node.last_seen and (time_ago_in_words(node.last_seen).to_s + " ago") %></td>
+    <td><%= node.wifidog_uptime and distance_of_time_in_words node.wifidog_uptime %></td>
+    <td>
+    <%= node.online_users.count %> Public Users
+    <% for connection in node.online_connections %>
+	  <% if connection.user.private.nil? || connection.user.private == false %>
+      	<br/><%= connection.user.login %>
+	  <% end %>
+    <% end -%>
+    </td>
+	<td>
+		<%= link_to 'Show', :controller => 'access_nodes', :action => 'show', :id => node.id %>
+	</td>
+  </tr>
+<% end -%>
+</table>
+
+<%= link_to 'New access_node', :action => 'new' %>

@@ -1,0 +1,33 @@
+xml.instruct! :xml, :version => "1.0"
+xml.kml(:xmlns => 'http://earth.google.com/kml/2.0'){
+  xml.document {
+    xml.style(:id => 'node_up'){
+      xml.iconstyle {
+        xml.scale 0.5
+        xml.icon {
+          xml.href('http://auth.ilesansfil.org/images/HotspotStatusMap/up.png')
+        }
+      }   
+    }
+    xml.style(:id => 'node_down'){
+      xml.iconstyle {
+        xml.scale 0.5
+        xml.icon {
+          xml.href('http://auth.ilesansfil.org/images/HotspotStatusMap/down.png')
+        }
+      }   
+    }
+    xml.style(:id => 'node_unknown') {
+      xml.iconstyle {
+        xml.scale 0.5
+        xml.icon {
+          xml.href('http://auth.ilesansfil.org/images/HotspotStatusMap/unknown.png')
+        }
+      }
+    }
+    xml.folder {
+      xml.name('DogOnRails')
+      xml << yield
+    }
+  }
+}

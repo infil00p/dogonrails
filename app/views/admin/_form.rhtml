@@ -1,0 +1,22 @@
+
+<% form_for :user, @user , :url => { :action => 'edit_user' } do |f| -%>
+
+<%= hidden_field_tag 'uid', @user.id %>
+
+<p><label for="password">Password</label><br/>
+<%= f.password_field :password %></p>
+
+<p><label for="password_confirmation">Confirm Password</label><br/>
+<%= f.password_field :password_confirmation %></p>
+
+<p><label for="Public: ">Privacy: </label> <%= f.check_box :private %>
+</p>
+
+<p><label for="user_roles">Role:</label><br/>
+<select id="user_role" name="user[role]">
+<option>normal</option><option>admin</option>
+</select>
+</p>
+
+<p><%= submit_tag 'Update' %></p>
+<% end -%>
