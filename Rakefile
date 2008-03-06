@@ -10,5 +10,5 @@ require 'rake/rdoctask'
 require 'tasks/rails'
 
 require 'vlad'
-Vlad.load
+Vlad.load :scm => :git
 

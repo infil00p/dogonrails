@@ -2,7 +2,7 @@ set :application, "dogonrails"
 set :user, "bowserj"
 set :domain,  "#{ user }@auth.dogonrails.net"
 set :deploy_to, "/var/www/dogonrails"
-set :repository, "http://dogonrails.googlecode.com/svn/trunk/dogonrails"
+set :repository, "github.com:bowserj/dogonrails.git"
 set :web, "apache"
 set :ssh_flags, "-p 2223"
 
