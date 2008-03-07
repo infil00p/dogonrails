@@ -113,7 +113,8 @@ class UserController < ApplicationController
             :user_role => "splash"
             )
        when AccessNode::AuthModes[:normal]:
-        if !user = User.authenticate(params[:username], params[:password])
+	# Normal means that this is the authenticator
+        if !user = node.authenticator.authenticate(params[:username], params[:password])
           flash[:notice] = "Username or password invalid"
           redirect_to :back and return
         end
@@ -166,8 +167,8 @@ class UserController < ApplicationController
       session[:gw_id] = session[:gw_address] = session[:gw_port] = nil
       authenticate
     else
-      # Redirect o user login, we don't have the info to auto-login in the session
-      render :action => 'login'
+      # Redirect to user login, we don't have the info to auto-login in the session
+      render :action => 'login_profile'
     end
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
