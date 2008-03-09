@@ -81,8 +81,9 @@ class AccessNodesController < ApplicationController
 
   def edit
     @access_node = AccessNode.find(params[:id])    
-    if @access_node.owner != session[:user] || session[:user].user_role != 'admin'
+    if @access_node.owner != session[:user]
       flash[:error] = 'This node is not yours!'
+      logger.info "User tried to access something that doesn't belong to them"
       return redirect_to :back
     end
   end
