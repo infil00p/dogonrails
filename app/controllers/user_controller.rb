@@ -5,6 +5,9 @@ class UserController < ApplicationController
 
   def index
     profile
+    if is_logged_in?
+    	render :action => "profile"
+    end
   end
   
   # Edit an avatar icon, password, and public/private setting
@@ -18,6 +21,7 @@ class UserController < ApplicationController
   def profile    
     @user = User.find_by_login(params[:username]) || session[:user]
     if @user.nil? || (@user != session[:user] && @user.private? == true)
+	logger.info('redirecting to front page')
         redirect_to :controller=> 'access_nodes', :action => 'googlemaps' and return    
     end
     @nodes = @user.access_nodes

@@ -47,7 +47,7 @@ class AccessNodesController < ApplicationController
     render(:action => 'googleearth', :layout => 'googleearth')
   end
   
-  def merhaki`
+  def merhaki
     @access_nodes = AccessNode.find(:all)
     @connections = Connection.find(:all)
     render(:action => "merhaki", :layout => "merhaki")
@@ -99,6 +99,16 @@ class AccessNodesController < ApplicationController
     end
   end
   
+  def delete
+	@access_node = AccessNode.find(params[:id])
+	if @access_node.destroy!
+		flash[:notice] = "Node Destroyed"
+	else
+		flash[:error] = "Error destroying node"
+	end
+	redirect_to :action => 'list'
+  end
+
   # Interface for Python Heartbeat Code
   # Designed for Wifi + GPS Use Case
   
@@ -122,7 +132,7 @@ class AccessNodesController < ApplicationController
       black_conn.expire!
     end
     
-    :qif blacklisted.save
+    if blacklisted.save
       flash[:notice] = blacklisted.mac + " has been blacklisted"
     else
       flash[:error] = 'Unable to blacklist ' + blacklisted.mac
