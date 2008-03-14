@@ -2,12 +2,17 @@ class AuthenticatorController < ApplicationController
 
 	before_filter :requires_admin
 
+	def index
+		list
+		render :action => 'list'
+	end
+
 	def list
 		@auths = Authenticator.find(:all)
 	end
 
 	def new
-		@auth - Authenticator.new
+		@auth = Authenticator.new
 	end
 
 	def create

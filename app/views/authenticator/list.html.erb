@@ -1,0 +1,39 @@
+<table>
+<tr>
+	<th>
+		Auth Name
+	</th>
+	<th>
+		Auth Type
+	</th>
+	<th>
+		Auth Server
+	</th>
+	<th>
+		Edit
+	</th>
+	<th>
+		Remove
+	</th>
+	<% @auths.each do |auth| %>
+		<tr>
+			<td>
+				<%= auth.auth_name %>
+			</td>
+			<td>
+				<%= auth.auth_type %>
+			</td>
+			<td>
+				<%= auth.auth_server %>
+			</td>
+			<td>
+				<%= link_to 'Edit' , :action => "edit", :id => auth.id %>
+			</td>
+			<td>
+				<%= link_to 'Remove', :action => "destroy", :id => auth.id %>
+			</td>
+	<% end %>
+</table>
+
+<%= link_to 'Add Authenticator', :action => 'new' %>
+

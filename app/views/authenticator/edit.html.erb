@@ -1,0 +1,7 @@
+<% form_for :auth do %>
+	<%= f.text_field :auth_name %>
+	<%= f.text_field :auth_server %>
+	<select name="auth[auth_type]">
+	</select>
+	<%= f.text_field :auth_secret %>
+<% end %>
