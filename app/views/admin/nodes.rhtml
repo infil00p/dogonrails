@@ -11,7 +11,8 @@
     <th>Last seen</th>
     <th>Wifidog Uptime</th>
     <th>Online users</th>
-	<th>Show</th>
+	<th>Stats</th>
+	<th>Edit</th>
   </tr>
 <% for node in @access_nodes -%>
   <tr>
@@ -33,6 +34,12 @@
     </td>
 	<td>
 		<%= link_to 'Show', :controller => 'access_nodes', :action => 'show', :id => node.id %>
+	</td>
+	<td>
+		<%= link_to 'Edit', :controller => 'access_nodes', :action => 'edit', :id => node.id %>		
+	</td>
+	<td>
+		<%= link_to 'Delete', :controller => 'access_nodes', :action => 'delete', :id => node.id %>
 	</td>
   </tr>
 <% end -%>

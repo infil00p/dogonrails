@@ -1,7 +1,8 @@
 class AccessNodesController < ApplicationController
 
   # There should be no way to create a node
-  before_filter :is_logged_in?, :only => ['new', 'create', 'edit', 'update']
+  before_filter :is_logged_in?, :only => ['new', 'create', 'edit', 'update', 'delete']
+  before_filter :owns_node, :only => ['edit', 'update', 'delete']
 
   def index
     googlemaps
@@ -46,7 +47,7 @@ class AccessNodesController < ApplicationController
     render(:action => 'googleearth', :layout => 'googleearth')
   end
   
-  def merhaki
+  def merhaki`
     @access_nodes = AccessNode.find(:all)
     @connections = Connection.find(:all)
     render(:action => "merhaki", :layout => "merhaki")
@@ -90,10 +91,6 @@ class AccessNodesController < ApplicationController
 
   def update
     @access_node = AccessNode.find(params[:id])
-    if @access_node.owner != session[:user] || session[:user].user_role != 'admin'
-      flash[:error] = 'This node is not yours!'
-      return redirect_to :back
-    end
     if @access_node.update_attributes(params[:access_node])
       flash[:notice] = 'AccessNode was successfully updated.'
       redirect_to :action => 'show', :id => @access_node
@@ -125,7 +122,7 @@ class AccessNodesController < ApplicationController
       black_conn.expire!
     end
     
-    if blacklisted.save
+    :qif blacklisted.save
       flash[:notice] = blacklisted.mac + " has been blacklisted"
     else
       flash[:error] = 'Unable to blacklist ' + blacklisted.mac
@@ -133,4 +130,8 @@ class AccessNodesController < ApplicationController
     redirect_back
   end
   
+  def owns_node
+	(node.user == session[:user]) || is_admin?
+  end
+
 end

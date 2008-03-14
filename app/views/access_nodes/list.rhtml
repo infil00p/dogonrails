@@ -38,6 +38,9 @@
 	<td>
 		<%= link_to 'Edit', :controller => 'access_nodes', :action => 'edit', :id => node.id %>		
 	</td>
+	<td>
+		<%= link_to 'Delete', :controller => 'access_nodes', :action => 'delete', :id => node.id %>
+	</td>
   </tr>
 <% end -%>
 </table>
