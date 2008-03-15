@@ -26,3 +26,7 @@ Welcome!
 <p>
 <%= link_to "signup for an account here", :controller => "user", :action => "signup" %>
 </p>
+
+<% content_for :footer do %>
+	<%= global_conf.ganal %>
+<% end %>
