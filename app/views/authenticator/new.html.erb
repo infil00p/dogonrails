@@ -1,7 +1,9 @@
-<% form_for :auth do %>
-	<%= f.text_field :auth_name %>
-	<%= f.text_field :auth_server %>
-	<select name="auth[auth_type]">
-	</select>
-	<%= f.text_field :auth_secret %>
+<% form_for :auth do |f|%>
+	Auth Name: <%= f.text_field :auth_name %> <br />
+	Auth Value: <%= f.text_field :auth_server %><br />
+	Auth Type: <select name="auth[auth_type]">
+		<option value="radius" selected >RADIUS</option>
+	</select><br />
+	Secret Word: <%= f.password_field :auth_secret %><br />
+	<%= submit_tag %>
 <% end %>

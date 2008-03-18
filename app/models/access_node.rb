@@ -11,6 +11,7 @@ class AccessNode < ActiveRecord::Base
   has_many :online_connections, :class_name => "Connection", :conditions => "used_on is not null and (expires_on is null or expires_on > NOW())"
 
   has_one :batman_node
+  has_one :node_setting
   has_one :authenticator
 
   validates_presence_of :name, :message => 'is required'
@@ -31,7 +32,9 @@ class AccessNode < ActiveRecord::Base
   validates_inclusion_of :auth_mode, :in => AuthModes.values
 
   before_validation :sanitize_mac, :geocode_addr
-  
+ 
+  after_create :add_settings
+
   class << self
     
     def check_quotas
@@ -167,6 +170,11 @@ class AccessNode < ActiveRecord::Base
     graph.data("Connections", points)
     filename = RAILS_ROOT + '/public/images/' + self.mac + '_usage.png'
     graph.write(filename)
+  end
+
+  def add_settings
+  	self.node_setting = NodeSetting.new
+	self.node_setting.save!
   end
 
 end
