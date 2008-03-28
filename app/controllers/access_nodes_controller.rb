@@ -141,7 +141,8 @@ class AccessNodesController < ApplicationController
   end
   
   def owns_node
-	(node.user == session[:user]) || is_admin?
+	node = AccessNode.find(params[:id])
+  	(node.user == session[:user]) || is_admin?
   end
 
 end
