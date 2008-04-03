@@ -1,19 +1,20 @@
 @access_nodes.each do | access_node |
   xml.node {
-    xml.mac(@access_node.mac)
-    xml.ip(@access_node.ip)
-    xml.name(@access_node.title)
-    xml.lat(@access_node.lat)
-    xml.lng(@access_node.lng)
+    xml.mac(access_node.mac)
+    xml.name(access_node.name)
+    xml.lat(access_node.lat)
+    xml.lng(access_node.lng)
     xml.is_active('true')
-    xml.seconds_since_update('')
-    xml.channel('')
-    xml.build('Merhaki')
+    xml.seconds_since_update(Time.now.to_i - access_node.last_seen.to_i )
+    xml.channel(1)
+    if access_node.batman_node.nil?
+	xml.ip('0.0.0.0')
+	xml.build('custom or never seen')
+    else
+	xml.ip(access_node.batman_node.last_ip)
+    	xml.build(access_node.batman_node.robin_ver)
+    end
     xml.arch('mips')
-#   @batman_kids.each do | batman_node |
-      
-#   end
-    xml.users_in_last_day('Stuff')
-    xml.usage_in_last_day_in_kbytes('')
   }
+
 end
