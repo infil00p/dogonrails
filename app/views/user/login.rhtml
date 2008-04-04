@@ -1,5 +1,8 @@
 Welcome to <%= @node.name %>!
 
+All web traffic will be redirected to the following URL: <br />
+<%= @node.redirect_url %><br />
+
 <%= render :partial => "login" %>
 
 <div id="notices">

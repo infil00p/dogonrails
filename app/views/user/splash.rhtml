@@ -1,5 +1,8 @@
 Welcome to <%= @node.name %>!
 
+This node will redirect to the following URL: <br />
+<%= @node.redirect_url %>
+<br />
 <%= render :partial => "splash" %>
 
 <div id="notices">
