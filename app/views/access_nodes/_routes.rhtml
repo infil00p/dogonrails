@@ -1,8 +1,7 @@
 <% routes.each do |route| 
 	last_node = nil
 	route.each do | node |
-		unless last_node.nil?
-%>
+		unless last_node.nil? || last_node.lat.nil? || last_node.lng.nil? || node.lat.nil? || node.lng.nil? %>
 		var polyline = new GPolyline([ 
 			new GLatLng(<%= last_node.lat %>, <%= last_node.lng %>),
 			new GLatLng(<%= node.lat%>, <%= node.lng %>), "#00ff00", 5]);
