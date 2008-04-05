@@ -48,6 +48,7 @@ class UserController < ApplicationController
       session[:gw_id] = params[:gw_id]
       session[:gw_address] = params[:gw_address]
       session[:gw_port] = params[:gw_port]
+      session[:forward_url] = params[:url]
       @node = AccessNode.find_by_mac(params[:gw_id])
 
       @notices = Notice.find(:all, :conditions => ['date_posted < ? AND expiry_date >= ? AND (access_node_id = ? OR access_node_id is ?)', Time.now, Time.now, @node.id, nil])
@@ -139,7 +140,8 @@ class UserController < ApplicationController
           :remote_addr => request.remote_addr,
           :token => token,
           :access_node => node,
-          :user => user
+          :user => user,
+	  :forward_url => session[:forward_url]
     )
     
     # Add the timeout to the Connection

@@ -50,7 +50,14 @@ class AdminController < ApplicationController
   def nodes
     @access_nodes = AccessNode.find(:all)
   end
-  
+
+  def change_node_owner
+	node = AccessNode.find(params[:node_id])
+	owner = User.find(params[:owner_id])
+	node.owner = owner
+	node.save
+  end 
+ 
   # This gets global settings for the network, and this will have default
   # settings when the site is installed
   

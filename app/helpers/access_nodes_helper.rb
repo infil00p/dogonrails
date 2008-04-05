@@ -36,4 +36,16 @@ module AccessNodesHelper
   end
     
 
+  def options_for_owners(current_user)
+    users = User.find(:all, :conditions => ['email NOT LIKE ?', '%@dogonrails.org'])
+    output = ""
+    users.each do |user|
+      if user == current_user
+        output += '<option value="' + user.id.to_s + '" selected >' + user.login + '</option>'
+      else
+        output += '<option value="' + user.id.to_s + '">' + user.login + '</option>'
+      end
+    end
+    output
+  end
 end

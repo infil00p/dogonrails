@@ -12,9 +12,7 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
 
-  before_save :encrypt_password
-
-  after_save :assign_admin
+  before_save :encrypt_password, :assign_admin
   
   has_many :access_nodes
   has_many :notices
@@ -79,20 +77,6 @@ class User < ActiveRecord::Base
     self.update_attribute("activated", true)
   end
   
-  def fb_node_data
-    users_online = 0
-    self.access_nodes do |node|
-      users_online += node.online_users.count
-    end
-    up_nodes = self.access_nodes.find(:all, :conditions => ['last_seen > ?', Time.now - 10.minutes])
-    down_nodes = self.access_nodes.find(:all, :conditions => ['last_seen < ?', Time.now - 10.minutes])
-    fbml_string = '<fb:name uid=' + self.fbuid + '" capitalize="true" /> currently has: <ul>'
-    fbml_string += '<li>' + up_nodes.length.to_s + ' nodes online</li>'
-    fbml_string += '<li>' + down_nodes.length.to_s + ' nodes offline </li>'
-    fbml_string += '<li>' + users_online.to_s + ' users on their nodes now </li></ul>'
-    fbml_string += '<a href="http://auth.dogonrails.net">Check Out FreeTheNet Now!</a>'
-  end
-
   protected
     # before filter 
     def encrypt_password
@@ -106,7 +90,7 @@ class User < ActiveRecord::Base
     end
     
     def assign_admin
-      if self.id == 1
+      if User.find(1).nil?
         self.user_role = ROLE_ADMIN
       end
     end

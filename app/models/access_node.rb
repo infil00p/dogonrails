@@ -59,7 +59,7 @@ class AccessNode < ActiveRecord::Base
   end
   
   def geocode_addr
-	unless address.nil?
+	unless address.nil? || custom_pos
       		res=MultiGeocoder.geocode(self.address)
       		self.lat = res.lat
       		self.lng = res.lng
@@ -79,14 +79,24 @@ class AccessNode < ActiveRecord::Base
     graph_conn = Connection.find(:all, :conditions => ['used_on > ? AND access_node_id = ?', timespan, self.id])
     points_up = []
     points_down = []
+    values_up = 0
+    values_down = 0
+    conn_day = graph_conn.first.used_on 
+    point_markers = {}
+    key = 0
     graph_conn.each do |conn|
-      points_down << conn.incoming_bytes
-      points_up << conn.outgoing_bytes
+      points_down << conn.incoming_bytes/1024**2
+      points_up << conn.outgoing_bytes/1024**2
+      if key.divmod(2).last == 0
+      	point_markers[key] = conn.used_on.month.to_s + "/" + conn.used_on.day.to_s
+      end
+      key += 1
     end
     graph = Gruff::Line.new(640)
-    graph.title = "Bandwidth"
+    graph.title = "Bandwidth (in MB)"
     graph.data("Upstream", points_up)
     graph.data("Downstream", points_down)
+    graph.labels = point_markers
     filename = RAILS_ROOT + '/public/images/' + self.mac + '_bandwidth.png'
     graph.write(filename)
   end
@@ -153,21 +163,26 @@ class AccessNode < ActiveRecord::Base
   def usage_graph(timespan)
     graph_conn = Connection.find(:all, :conditions => ['used_on > ? AND access_node_id = ?', timespan, self.id])
     points = []
+    labels = {}
     # This can take day, hour and minute to generate graphs
     date = nil
     value = 0
+    key = 0
     graph_conn.each do |conn|      
       if conn.used_on.day == date
         value += 1
       else
         points << value
         value = 0
+	labels[key] = conn.used_on.month.to_s + "/" + conn.used_on.day.to_s
         date = conn.used_on.day
-      end
+      end 
+      key += 1
     end
     graph = Gruff::Line.new(640)
     graph.title = "Connections"
     graph.data("Connections", points)
+    graph.labels = labels
     filename = RAILS_ROOT + '/public/images/' + self.mac + '_usage.png'
     graph.write(filename)
   end

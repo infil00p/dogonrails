@@ -11,7 +11,9 @@ class PortalController < ApplicationController
       redirect_to :action => "external" and return
     end
 
-    if not @node.redirect_url.blank?
+    if @node.redirect_url.blank?
+      redirect_to session[:forward_url] and return
+    else
       redirect_to @node.redirect_url and return
     end
   end

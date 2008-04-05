@@ -55,6 +55,7 @@ class AccessNodesController < ApplicationController
   
   def new
     @access_node = AccessNode.new
+    @current_user = session[:user]
   end
 
   def show
@@ -81,7 +82,8 @@ class AccessNodesController < ApplicationController
   end
 
   def edit
-    @access_node = AccessNode.find(params[:id])    
+    @access_node = AccessNode.find(params[:id])
+    @current_user = session[:user]
     if @access_node.owner != session[:user]
       flash[:error] = 'This node is not yours!'
       logger.info "User tried to access something that doesn't belong to them"
@@ -142,7 +144,8 @@ class AccessNodesController < ApplicationController
   
   def owns_node
 	node = AccessNode.find(params[:id])
-  	(node.user == session[:user]) || is_admin?
+  	session[:user].user_role == "admin" || node.owner == session[:user]
+    
   end
 
 end
