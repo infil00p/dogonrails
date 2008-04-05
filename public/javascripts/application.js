@@ -130,9 +130,9 @@ function createMarker(point, logged_in, active, alert, id, users, html)
     });
     GEvent.addListener(marker, "dragend", function() {
 		    var new_coords = marker.getLatLng();
-		    var newlat = new_coords.lat();
-		    var newlng = new_coords.lng();
-		    new Ajax.request('/access_nodes/moving?node_id=' + id + "&lat=" + lat + " &lng=" + lng);		 
+		    var lat = new_coords.lat();
+		    var lng = new_coords.lng();
+		    new Ajax.Request('/access_nodes/moving?node_id=' + id + "&lat=" + lat + " &lng=" + lng);		 
 		    });
     
     return marker;
