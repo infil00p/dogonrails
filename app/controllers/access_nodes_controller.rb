@@ -112,13 +112,14 @@ class AccessNodesController < ApplicationController
   end
 
   # Interface for Python Heartbeat Code
-  # Designed for Wifi + GPS Use Case
+  # Originally Designed for Wifi + GPS Use Case
+  # Now meant for google maps applications
   
   def moving
     @access_node = AccessNode.find(params[:node_id])
-    @access_node.ele = params[:ele]
     @access_node.lat = params[:lat]
     @access_node.lng = params[:lng]
+    @access_node.custom_pos = true
     @access_node.save!
   end
   
