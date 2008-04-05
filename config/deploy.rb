@@ -16,7 +16,7 @@ namespace :vlad do
   remote_task :symlink, :roles => :app do
 	run "rm /var/www/dogonrails/current/config/database.yml"
 	run "ln -s /var/www/dogonrails/shared/database.yml /var/www/dogonrails/current/config/database.yml"
-	run "ln -s /var/www/dogonrails/shared/upgrade /var/www/dogonrails/public/upgrade"
+	run "ln -s /var/www/dogonrails/shared/upgrade /var/www/dogonrails/current/public/upgrade"
 	run "ln -s /var/www/dogonrails/shared/logos /var/www/dogonrails/current/public/logo"
 	run "ln -s /var/www/dogonrails/shared/tiny_mce /var/www/dogonrails/current/vendor/plugins/tiny_mce"
   end
