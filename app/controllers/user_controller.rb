@@ -140,7 +140,8 @@ class UserController < ApplicationController
           :remote_addr => request.remote_addr,
           :token => token,
           :access_node => node,
-          :user => user
+          :user => user,
+	  :forward_url => session[:forward_url]
     )
     
     # Add the timeout to the Connection
