@@ -59,7 +59,7 @@ class AccessNode < ActiveRecord::Base
   end
   
   def geocode_addr
-	unless address.nil?
+	unless address.nil? || custom_pos
       		res=MultiGeocoder.geocode(self.address)
       		self.lat = res.lat
       		self.lng = res.lng

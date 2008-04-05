@@ -120,14 +120,20 @@ function createIcon(active, alert, users)
   
 }
 
-function createMarker(point, active, alert, users, html)
+function createMarker(point, logged_in, active, alert, id, users, html)
 {
     var icon = createIcon(active, alert, users);
-    markerOptions = { icon:icon };
+    markerOptions = { icon:icon, draggable:logged_in };
     var marker = new GMarker(point, markerOptions);
     GEvent.addListener(marker, "click", function() {
         marker.openInfoWindowHtml(html);
     });
+    GEvent.addListener(marker, "dragend", function() {
+		    var new_coords = marker.getLatLng();
+		    var newlat = new_coords.lat();
+		    var newlng = new_coords.lng();
+		    new Ajax.request('/access_nodes/moving?node_id=' + id + "&lat=" + lat + " &lng=" + lng);		 
+		    });
     
     return marker;
 

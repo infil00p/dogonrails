@@ -33,8 +33,11 @@
             {
                 active = false;
             }
-            
-            var marker = createMarker(point, active, alert, users, info_string);
+            <% if session[:user].nil? %>
+              var marker = createMarker(point, false, active, alert, users, info_string);
+            <% else %>
+              var marker = createMarker(point, true, active, alert, users, info_string);
+            <% end %>
             map.addOverlay(marker);
 			
 			<% unless routes.length == 0 %>

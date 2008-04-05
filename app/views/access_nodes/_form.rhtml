@@ -12,7 +12,12 @@
 <%= text_field 'access_node', 'quota' %></p>
 <p><label for="access_node_auth_mode">Auth Mode</label><br/>
 <select id="access_node_auth_mode" name="access_node[auth_mode]">
-<option>NORMAL</option><option>SPLASH</option>
+<option>SPLASH</option><option>NORMAL</option>
+</select>
+<br />
+<p><label for="owner">Node Owner</label></p>
+<select id="access_node_user_id" name="access_node[user_id]">
+  <%= options_for_owners(@current_user) %>
 </select>
 </p>
 

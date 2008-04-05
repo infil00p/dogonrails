@@ -14,5 +14,6 @@ info_string += "</ul>";
 <% unless session[:user].nil? %>
 info_string += "<br />";
 info_string += '<%= link_to "View Stats", :controller => "access_nodes", :action => "show", :id => node.id %><br />'
+info_string == '<%= link_to "Edit Node", :controller => "access_nodes", :action => "edit", :id => node.id %><br />'
 info_string += '<%= link_to "Remove Node", :controller => "access_nodes", :action => "remove", :id => node.id %><br />'
 <% end %>
