@@ -1,5 +1,5 @@
 @access_nodes.each do | access_node |
   unless access_node.lat.nil? || access_node.lng.nil?
-    xml.node :name => access_node.name, :usage => access_node.total_up + access_node.total_down , :mac=>access_node.mac, :users_human => access_node.online_users.count.to_s + " users", :seconds_since_update => (Time.now.to_i - access_node.last_seen.to_i), :lat => access_node.lat, :lng => access_node.lng
+    xml.node :name => access_node.name, :usage => access_node.total_up + access_node.total_down , :mac=>access_node.mac, :users => access_node.online_users, :seconds_since_update => (Time.now.to_i - access_node.last_seen.to_i), :lat => access_node.lat, :lng => access_node.lng
   end
 end
