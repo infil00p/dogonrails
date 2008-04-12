@@ -1,0 +1,14 @@
+Total Users in the past month: <%= @total_users %> <br />
+<br />
+Top Five Highest Bandwidth Nodes: <br />
+<ul>
+        <% @top_five_nodes_bandwidth.each do |node| %>
+                <li><%= node.name %> - <%= convert_to_human(node.total_aggregate_bandwidth) %> </li>
+        <% end %>
+</ul>
+Top Five Nodes with the most users: <br />
+<ul>
+        <% @top_five_nodes_conn.each do |node| %>
+                <li><%= node.name %> - <%= node.connections.group_by(&:mac).length %> </li>
+        <% end %>
+</ul>
