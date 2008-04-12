@@ -195,8 +195,8 @@ class AccessNode < ActiveRecord::Base
   end
 
   def add_settings
-  	self.node_setting = NodeSetting.new
-	  self.node_setting.save!
+  	config = NodeSetting.new :access_node => self
+	  config.save
   end
 
 end
