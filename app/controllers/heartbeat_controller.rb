@@ -19,8 +19,6 @@ def update
   batman_node.robin_ver = params[:robin]
   batman_node.batman_ver = params[:batman]
   batman_node.pssid = params[:pssid]
-  batman_node.memfree = params[:memfree]
-  batman_node.uptime = params[:uptime]
   batman_node.gw_qual = params["gw-qual"]
   batman_node.routes = params[:routes]
   batman_node.hops = params[:hops]
@@ -30,9 +28,12 @@ def update
     batman_node.gateway = true
   end
   batman_node.save
-  unless node_updating.node_setting.nil?
-    @node_settings = node_updating.node_settings
+  if node_updating.node_setting.nil?
+     config = NodeSetting.new
+     node_updating.node_setting = config
+     config.save!
   end
+  @node_settings = node_updating.node_setting
   render :layout => false;
   
 end

@@ -32,8 +32,6 @@ class AccessNode < ActiveRecord::Base
   validates_inclusion_of :auth_mode, :in => AuthModes.values
 
   before_validation :sanitize_mac, :geocode_addr
- 
-  after_create :add_settings
 
   class << self
     
