@@ -48,6 +48,7 @@ class AccessNode < ActiveRecord::Base
       		end
 	     end
     end
+
   end
   
   def owner
@@ -81,16 +82,18 @@ class AccessNode < ActiveRecord::Base
     points_down = []
     values_up = 0
     values_down = 0
-    conn_day = graph_conn.first.used_on 
-    point_markers = {}
-    key = 0
-    graph_conn.each do |conn|
-      points_down << conn.incoming_bytes/1024**2
-      points_up << conn.outgoing_bytes/1024**2
-      if key.divmod(2).last == 0
-      	point_markers[key] = conn.used_on.month.to_s + "/" + conn.used_on.day.to_s
+    unless graph_conn.length == 0
+      conn_day = graph_conn.first.used_on 
+      point_markers = {}
+      key = 0
+      graph_conn.each do |conn|
+        points_down << conn.incoming_bytes/1024**2
+        points_up << conn.outgoing_bytes/1024**2
+        if key.divmod(2).last == 0
+      	  point_markers[key] = conn.used_on.month.to_s + "/" + conn.used_on.day.to_s
+        end
+        key += 1
       end
-      key += 1
     end
     graph = Gruff::Line.new(640)
     graph.title = "Bandwidth (in MB)"
@@ -100,7 +103,7 @@ class AccessNode < ActiveRecord::Base
     filename = RAILS_ROOT + '/public/images/' + self.mac + '_bandwidth.png'
     graph.write(filename)
   end
-  
+ 
   def total_up
      bytes_up = 0
      connections = self.connections.find(:all, :conditions => [ 'created_on > ?', Time.now - 1.month ])
@@ -187,9 +190,13 @@ class AccessNode < ActiveRecord::Base
     graph.write(filename)
   end
 
+  def unique_users
+          self.connections.uniq
+  end
+
   def add_settings
   	self.node_setting = NodeSetting.new
-	self.node_setting.save!
+	  self.node_setting.save!
   end
 
 end
