@@ -71,16 +71,16 @@ input.iphone {
 }
 
 #container {
-	background-color: #ffffff;
 	margin: 0px auto;
 	width: 1000px;
 }
 
 #contentbox, #branding {
-	position: relative;
+  position: relative;
 }
 
 #contentbox {
+  background-color:#ffffff;
 	padding: 10px;
 	min-height: 600px;
 }

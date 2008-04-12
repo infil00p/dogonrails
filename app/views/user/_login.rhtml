@@ -15,8 +15,9 @@
     <%= hidden_field_tag 'gw_id', params[:gw_id] %>
     <%= hidden_field_tag 'gw_address', params[:gw_address] %>
     <%= hidden_field_tag 'gw_port', params[:gw_port] %>
-   <button type="submit" name="" value=""><img src="/images/login.png" /></button>
-  <% end %>
+    <button type="submit" name="" style="border: none; width: 220px; background-color: #ffffff"><img src="/images/login.png" /></button>  
+
+<% end %>
 </div>
 
 <%= link_to "signup for an account here", :controller => "user", :action => "signup" %>
