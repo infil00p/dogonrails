@@ -103,7 +103,7 @@ class AccessNodesController < ApplicationController
   
   def delete
 	@access_node = AccessNode.find(params[:id])
-	if @access_node.destroy!
+	if @access_node.destroy
 		flash[:notice] = "Node Destroyed"
 	else
 		flash[:error] = "Error destroying node"
