@@ -50,8 +50,9 @@ input.iphone {
 
 
 #notices {
-	background-color:#9999EE;
-	border-style:solid;
+  background-color:#CC1111;
+  border:5px solid #000000;
+  color:#FFFFFF;
 	left:300px;
 	position:absolute;
 	top:0px;
@@ -59,8 +60,9 @@ input.iphone {
 }
 
 #inner_notices {
-	background-color: #CCCCFF;
+	background-color: #D0CCCC;
 	overflow: auto;
+  color: #000000;
 	height:250px;
 }
 
@@ -114,5 +116,9 @@ input.iphone {
 
 #content {
 	margin-bottom: 100px;
+}
+
+#splash_control {
+  width: 290px;
 }
 
