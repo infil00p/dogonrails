@@ -40,10 +40,6 @@
             <% end %>
             map.addOverlay(marker);
 			
-			<% unless routes.length == 0 %>
-				<%= render :partial => 'access_nodes/routes', :locals => { :routes => routes }%>
-			<% end %>
-												
 		<% end %>
 	<% end %>
 	
