@@ -27,9 +27,8 @@ Downstream: <%= all_data_downloaded %><br />
 <p>Click <%= link_to 'here', :controller => 'user', :action => 'signup' %> to signup</p>
 
 <% else %>
-<script>
-	document.location.href = '/user/profile'
-</script>
+
+        <p>Click <%= link_to 'here', :controller => 'user', :action => 'profile' %> to see your profile </p>
 
 <% end %>
 </div>
