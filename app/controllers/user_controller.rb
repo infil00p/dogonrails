@@ -194,17 +194,17 @@ class UserController < ApplicationController
   end
  
   def signup_and_add
-	@user = User.new(params[:user])
-	@access_node = AccessNode.new(params[:access_node])
-	return unless request.post?
-	@user.activation_code = UUID.random_create.to_s
-	@user.save!
-	@access_node.save!
-	SystemMailer.deliver_auth_deliver(@user, url_for(:controller => "user", :action => 'activate', :code => @user.activation_code))
-	flash[:notice] = "An email to validate that you're the owner of the node has been sent to #{@user.email}."
-	render :action => 'login'
-  rescue ActiveRecord::RecordInvalid
-	  render :action => 'signup'
+	  @user = User.new(params[:user])
+	  @access_node = AccessNode.new(params[:access_node])
+	  return unless request.post?
+	  @user.activation_code = UUID.random_create.to_s
+	  @user.save!
+	  @access_node.save!
+	  SystemMailer.deliver_auth_deliver(@user, url_for(:controller => "user", :action => 'activate', :code => @user.activation_code))
+	  flash[:notice] = "An email to validate that you're the owner of the node has been sent to #{@user.email}."
+	  render :action => 'login'
+    rescue ActiveRecord::RecordInvalid
+	    render :action => 'signup'
   end 
   
   # TO-DO: Find a less expensive way to do this
@@ -217,7 +217,9 @@ class UserController < ApplicationController
     end
     reset_session
     flash[:notice] = "You have been logged out."
-    redirect_to :controller => 'user', :action => 'login'
+    # This looks wrong, but in fact this gives a better UX.  If they need to re-login, 
+    # as soon as they try to re-navigate, they'll get the login again!
+    redirect_to :controller => 'user', :action => 'login_profile'
   end
   
   def convert_to_human(bytes)

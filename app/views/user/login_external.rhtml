@@ -1,14 +1,13 @@
-Welcome!
+<h2>Welcome!</h2>
 
-<% if @node -%>
-  <p>You seem to be at <%= @node.name %>.</p>
+<p>If you can not get past this page, this is the first time you have setup your FreeTheNet node.  You have to do the following
+things to setup your node</p>
+<ol>
+        <li><%= link_to "Create an Account", :controller => "user", :action => "signup" %></li>
+        <li>Add your node to the network</li>
+</ol>
 
-  <p>Try to get to another page (for example... google), to get the hotspot's login screen.</p>
-
-  <p>Otherwise:</p>
-<% end -%>
-
-<p>You can login as an "external user":</p>
+<p>If you already have an account, you can use the form below to login:</p>
 
 <div id="login">
   <p>Please type in your username and password below:</p>
@@ -22,7 +21,3 @@ Welcome!
   <%= submit_tag 'Login' %>
   <% end %>
 </div>
-
-<p>
-<%= link_to "signup for an account here", :controller => "user", :action => "signup" %>
-</p>
