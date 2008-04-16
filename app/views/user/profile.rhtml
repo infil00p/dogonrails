@@ -18,6 +18,12 @@
 <% end %>
 </table>
 <% end %>
+<% if @nodes.length == 0 %>
+        <p>
+        Your account has no nodes added as of yet, please add some nodes so that your
+        account works properly!
+        </p>
+<% end %>
 <div id="activities">
 	<h3>Actions:</h3>
 	<ul>

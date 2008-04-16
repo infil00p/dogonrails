@@ -102,7 +102,7 @@ class UserController < ApplicationController
 
   def authenticate
     return unless request.post?      
-    redirect_to :controller => "portal" and return if !params[:gw_id]
+    redirect_to :controller => "user", :action => "profile" and return if !params[:gw_id]
 
     node = AccessNode.find_by_mac(params[:gw_id])
     user = nil
