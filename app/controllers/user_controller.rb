@@ -50,6 +50,10 @@ class UserController < ApplicationController
       session[:gw_port] = params[:gw_port]
       session[:forward_url] = params[:url]
       @node = AccessNode.find_by_mac(params[:gw_id])
+      
+      if @node.nil?
+        redirect_to :action => "login_external" and return
+      end
 
       @notices = Notice.find(:all, :conditions => ['date_posted < ? AND expiry_date >= ? AND (access_node_id = ? OR access_node_id is ?)', Time.now, Time.now, @node.id, nil])
 
