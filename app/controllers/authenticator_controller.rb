@@ -16,17 +16,17 @@ class AuthenticatorController < ApplicationController
 	end
 
 	def create
-		@auth = Authenticator.new(params[:auth])
+		@auth = Authenticator.create(params[:auth])
 	end
+
+  def edit
+    @auth = Authenticator.find(params[:id])
+  end
 
 	def update
 		@auth = Authenticator.find(params[:id])
 		@auth.update_attributes(params[:auth])
 		@auth.save!
-	end
-
-	def update
-		@auth = Authenticator.find(params[:id])
 	end
 
 	def destroy
