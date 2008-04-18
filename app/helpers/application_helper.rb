@@ -18,8 +18,11 @@ module ApplicationHelper
     return terabytes.to_s + ' TB'
   end
   
-  def global_conf
-    Globalconf.find(1)
+  def global_conf(uri)
+    config = Globalconf.find_by_auth_url(uri)
+    if config.nil?
+            config = Globalconf.find(1)
+    end
   end
   
 end

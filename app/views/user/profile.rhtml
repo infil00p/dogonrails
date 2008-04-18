@@ -1,9 +1,9 @@
 <% content_for 'header' do %>
-  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<%= global_conf.gmaps_key %>"
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<%= global_conf(request.domain).gmaps_key %>"
       type="text/javascript"></script>
 <% end %>
 
-<%= render :partial => 'googlemap', :locals => { :access_nodes => @nodes , :routes => @routes, :global => global_conf} %>
+<%= render :partial => 'googlemap', :locals => { :access_nodes => @nodes , :routes => @routes, :global => global_conf(request.domain)} %>
 
 <div id="network_status">
 <% if @user.user_role != User::ROLE_SPLASH %>	

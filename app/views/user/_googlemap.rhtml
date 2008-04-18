@@ -5,8 +5,8 @@
 <script type="text/javascript">
 	var map = new GMap2($('map_canvas'))
 	/* TO-DO: Set a global settings object to handle this */
-	var centerArea = new GLatLng(<%= global_conf.center_lat %>, <%= global_conf.center_lng %>);
-	map.setCenter(centerArea, <%= global_conf.zoom %>);
+	var centerArea = new GLatLng(<%= global_conf(request.domain).center_lat %>, <%= global_conf(request.domain).center_lng %>);
+	map.setCenter(centerArea, <%= global_conf(request.domain).zoom %>);
 	map.addControl(new GLargeMapControl());
 	map.addControl(new GMapTypeControl());
 	map.enableScrollWheelZoom();
