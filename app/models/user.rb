@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   def activate!
     self.update_attribute("activated", true)
   end
-  
+
   protected
     # before filter 
     def encrypt_password

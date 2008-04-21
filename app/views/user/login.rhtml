@@ -3,6 +3,12 @@ Welcome to <%= @node.name %>!
 All web traffic will be redirected to the following URL: <br />
 <%= @node.redirect_url %><br />
 
+This node is located at: <br />
+<div class="geo">
+        <abbr class="latitude" title="<%= @node.lat %>"><%= @node.lat %></abbr> 
+        <abbr class="longitude" title="<%= @node.lng %>"><%= @node.lng %></abbr>
+</div>
+
 <%= render :partial => "login" %>
 
 <div id="notices">
