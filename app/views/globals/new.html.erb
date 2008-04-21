@@ -1,7 +1,7 @@
 <% form_for :globalconf, @global, :url => { :action => 'create' }, :html => { :multipart => true } do |f| %>
 Network Name: <%= f.text_field 'network_name' %><br />
 Network Logo: <%= file_field_tag('network_logo') %><br />
-Network URI: <%= f.text_field 'auth_uri' %> <br />
+Network URI: <%= f.text_field 'auth_url' %> <br />
 <h3>For Maps and Google Earth</h3>
 GMaps Key: <%= f.text_field 'gmaps_key' %> <br />
 Center Latitiude: <%= f.text_field 'center_lat' %> <br />
