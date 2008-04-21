@@ -10,9 +10,9 @@ class Connection < ActiveRecord::Base
     
     def list_by_date(page, date, node)
       if node.nil?
-        paginate :per_page => 10, :page => page, :conditions => ['used_on > ?', date]
+        paginate :per_page => 10, :page => page, :conditions => ['used_on > ?', date], :order => 'used_on desc'
       else
-        paginate :per_page => 10, :page => page, :conditions => ['used_on > ? AND access_node_id = ?', date, node.id]
+        paginate :per_page => 10, :page => page, :conditions => ['used_on > ? AND access_node_id = ?', date, node.id], :order => 'used_on desc'
       end
     end 
     
