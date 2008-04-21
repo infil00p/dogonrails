@@ -14,6 +14,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '', :controller => "user", :action => "profile"
   #
   
+  map.resources :globals
+
   # Support current protocol's URLS
   map.connect 'login', :controller => "user", :action => "login"
   map.connect 'auth', :controller => "wifidog", :action => "auth"

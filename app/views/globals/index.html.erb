@@ -1,0 +1,28 @@
+<table>
+        <tr>
+                <th>
+                       Hosted URI
+               </th>
+               <th>
+                       Edit
+               </th>
+               <th>
+                       Delete
+               </th>
+       </tr>
+       <% @globals.each do |global| %>
+               <tr>
+                       <td>
+                               <%= global.auth_url %>                               
+                       </td>
+                       <td>
+                               <%= link_to "Edit", :controller => "globals", :action => "edit", :id => global.id %>
+                       </td>
+                       <td>
+                               <%= link_to "Destroy", :controller => "globals", :action => "delete", :id => global.id %>
+                       </td>
+               </tr>
+       <% end %>
+</table>
+
+<%= link_to "Add Global Settings", :controller => 'globals', :action => 'new' %>

@@ -1,0 +1,14 @@
+<% form_for :globalconf, @global, :url => { :action => 'update' }, :html => { :multipart => true } do |f| %>
+Network Name: <%= f.text_field 'network_name' %><br />
+Network Logo: <%= file_field_tag('network_logo') %><br />
+Network URI: <%= f.text_field 'auth_uri' %><br />
+<h3>For Maps and Google Earth</h3>
+GMaps Key: <%= f.text_field 'gmaps_key' %> <br />
+Center Latitiude: <%= f.text_field 'center_lat' %> <br />
+Center Longitude: <%= f.text_field 'center_lng' %> <br />
+Center Zoom: <%= f.text_field 'zoom' %> <br />
+<h3>Google Analytics Code: </h3>
+<p><label for="global_g_anal">Code:</label><br/>
+<%= f.text_area 'ganal'  %></p>
+<%= submit_tag 'Update Global Settings' %>
+<% end %>
