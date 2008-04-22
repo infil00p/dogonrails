@@ -1,5 +1,7 @@
 class GlobalsController < ApplicationController
 
+  before_filter :requires_admin
+
   def index
     @globals = Globalconf.find(:all)
   end
