@@ -28,5 +28,5 @@ Welcome!
 </p>
 
 <% content_for :footer do %>
-	<%= global_conf.ganal %>
+	<%= global_conf(request.domain).ganal %>
 <% end %>
