@@ -22,7 +22,7 @@ class GlobalsController < ApplicationController
 
   def update
           @global = Globalconf.find(params[:id])
-          @global.update_attribute(params[:globalconf])
+          @global.update_attributes(params[:globalconf])
           @global.save
           flash[:notice] = "Updated global configuration settings"
           redirect_to :controller => 'user', :action => 'profile'
