@@ -40,7 +40,27 @@ class AccessNodesController < ApplicationController
     end
     render(:action => 'googlemaps')
   end        
-  
+ 
+  def gmaps
+    @access_nodes = AccessNode.find(:all)
+    @routes = []
+    @access_nodes.each do | node |
+      unless node.batman_node.nil? || node.batman_node.gateway?
+        route_list = node.batman_node.routes
+        ip_addrs = route_list.split(',')
+        route = [node]
+        ip_addrs.each do |ip_addr|
+          batman_node = BatmanNode.find_by_last_ip(ip_addr)
+          unless batman_node.nil?
+            route << batman_node.access_node
+          end
+        end
+        @routes << route
+      end
+    end
+    render :layout => "gmaps"
+  end
+
   def googleearth
     @access_nodes = AccessNode.find(:all)
     @response.headers["Content-Type"] = 'application/keyhole'
