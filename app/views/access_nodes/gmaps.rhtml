@@ -3,5 +3,5 @@
       type="text/javascript"></script>
 <% end %>
 
-<%= render :partial => 'user/googlemap', :locals => { :access_nodes => @access_nodes, :routes => @routes, :global => global_conf(request.domain) } %>
+<%= render :partial => 'googlemap', :locals => { :access_nodes => @access_nodes, :routes => @routes, :global => global_conf(request.domain) } %>
 
