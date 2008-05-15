@@ -1,0 +1,47 @@
+<div id="map_canvas" style="width: 800px; height: 600px;">
+	
+</div>
+
+<script type="text/javascript">
+	var map = new GMap2($('map_canvas'))
+	/* TO-DO: Set a global settings object to handle this */
+	var centerArea = new GLatLng(<%= global_conf(request.domain).center_lat %>, <%= global_conf(request.domain).center_lng %>);
+	map.setCenter(centerArea, <%= global_conf(request.domain).zoom %>);
+	map.addControl(new GLargeMapControl());
+	map.addControl(new GMapTypeControl());
+	map.enableScrollWheelZoom();
+
+
+	<% access_nodes.each do |access_node| %>
+		<% if !access_node.lat.nil? && !access_node.lng.nil? %>
+			var point = new GLatLng(<%= access_node.lat %>, <%= access_node.lng %>);						
+			
+			var users = <%= access_node.online_users.count %>
+			var active = true;
+			var alert = false;
+						
+			<%= render :partial => 'access_nodes/info_string', :locals => { :node => access_node } %>
+			
+			var last_seen = <%= (Time.now.to_i - access_node.last_seen.to_i ).to_s %>
+			
+	    if (last_seen > 50000)
+            {
+                active = true;
+                alert = true;				
+            }
+            if (last_seen > 500000)
+            {
+                active = false;
+            }
+            <% if session[:user].nil? %>
+              var marker = createMarker(point, false, active, alert, <%= access_node.id %> , users, info_string);
+            <% else %>
+              var marker = createMarker(point, true, active, alert, <%= access_node.id %>, users, info_string);
+            <% end %>
+            map.addOverlay(marker);
+			
+		<% end %>
+	<% end %>
+	
+	
+</script>
