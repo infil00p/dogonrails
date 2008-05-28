@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   class << self
     
     def list(page)
-        paginate :per_page => 20, :page => page 
+        paginate :per_page => 20, :page => page, :conditions => "email not like '%dogonrails.org'"
     end   
   end
 
